@@ -1,0 +1,31 @@
+{
+	"files.associations": {
+		"stdlib.h": "c",
+		"sstream": "c",
+		"unistd.h": "c",
+		"__bit_reference": "cpp",
+		"__functional_base": "cpp",
+		"__node_handle": "cpp",
+		"algorithm": "cpp",
+		"atomic": "cpp",
+		"bitset": "cpp",
+		"chrono": "cpp",
+		"__memory": "cpp",
+		"functional": "cpp",
+		"iterator": "cpp",
+		"limits": "cpp",
+		"locale": "cpp",
+		"memory": "cpp",
+		"optional": "cpp",
+		"ratio": "cpp",
+		"system_error": "cpp",
+		"tuple": "cpp",
+		"type_traits": "cpp",
+		"vector": "cpp",
+		"unordered_map": "c",
+		"ft.h": "c",
+		"ft_tail.h": "c",
+		"uio.h": "c",
+		"fcntl.h": "c"
+	}
+}
