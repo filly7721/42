@@ -1,35 +1,20 @@
 #include "libft.h"
 
-static int	check_set(char c, char const *set)
-{
-	int i;
-	
-	i = 0;
-	while	(set[i] != '\0' && set[i] != c)
-		i++;
-	return (set[i] == c);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		i;
-	int		size;
+	int		j;
 	char	*res;
-
-	size = 0;
+	
 	i = 0;
-	while (s1[i] != '\0')
-		if (!check_set(s1[i++], set))
-			size++;
-	res = malloc(sizeof(char) * (size + 1));
-	size = 0;
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		if(!check_set(s1[i], set))
-			res[size++] = s1[i];
+	j = ft_strlen(s1) - 1;
+	while (s1[i] != '\0' && ft_strchr(set, s1[i]))
 		i++;
-	}
-	res[size] = '\0';
+	while (j >= i && ft_strchr(set, s1[j]))
+		j--;
+	j++;
+	res = malloc(sizeof(char) * (j - i + 1));
+	if (res)
+		ft_strlcpy(res, &s1[i], j - i + 1);
 	return (res);
 }
