@@ -24,6 +24,8 @@ char	*ft_itoa(int n)
 		num = -n;
 	size = digit_count(n);
 	res = malloc(sizeof(char) * (size + 1));
+	if (!res)
+		return (NULL);
 	res[size] = '\0';
 	while (--size >= (n < 0))
 	{

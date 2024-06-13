@@ -11,7 +11,7 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)&s[i]);
 		i++;
 	}
-	if (c == '\0')
+	if ((unsigned char)c == '\0')
 		return ((char *)&s[i]);
 	return (0);
 }
