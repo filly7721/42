@@ -1,13 +1,13 @@
 char	*ft_strrchr(const char *s, int c)
 {
-	int 	i;
+	int		i;
 	char	*res;
 
 	i = 0;
 	res = 0;
 	while (s[i] != '\0')
 	{
-		if(s[i] == (unsigned char)c)
+		if (s[i] == (unsigned char)c)
 			res = (char *)&s[i];
 		i++;
 	}

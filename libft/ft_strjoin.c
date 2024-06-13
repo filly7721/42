@@ -10,7 +10,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	size1 = ft_strlen(s1);
 	size2 = ft_strlen(s2);
-
 	res = malloc(sizeof(char) * (size1 + size2 + 1));
 	if (!res)
 		return (NULL);

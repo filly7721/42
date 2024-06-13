@@ -25,8 +25,8 @@ char	*ft_strnstr(const char *big,	const char *little, size_t len)
 
 	if (little[0] == '\0')
 		return ((char *)big);
-	if(len < ft_strlen(little))
-		return 0;
+	if (len < ft_strlen(little))
+		return (NULL);
 	max = len - ft_strlen(little) + 1;
 	i = 0;
 	while (big[i] != '\0' && i < max)
@@ -37,5 +37,5 @@ char	*ft_strnstr(const char *big,	const char *little, size_t len)
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

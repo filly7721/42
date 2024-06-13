@@ -5,7 +5,7 @@ static void	rec_putnbr_fd(unsigned int n, int fd)
 	char	c;
 
 	if (n == 0)
-		return;
+		return ;
 	c = n % 10 + '0';
 	rec_putnbr_fd(n / 10, fd);
 	write(fd, &c, 1);

@@ -8,13 +8,13 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	map = ft_lstnew(f(lst->content));
 	curr = map;
 	lst = lst->next;
-	while(lst && curr)
+	while (lst && curr)
 	{
 		curr->next = ft_lstnew(f(lst->content));
 		curr = curr->next;
 		lst = lst->next;
 	}
-	if(curr == NULL)
+	if (curr == NULL)
 	{
 		ft_lstclear(&map, del);
 		return (NULL);
