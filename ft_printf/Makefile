@@ -1,8 +1,8 @@
-SRCS	=	ft_printf.c ft_puthex.c ft_putnbr.c ft_putstr.c
+SRCS	=	${shell find . -name '*.c'}
 
 OBJS	=	${SRCS:.c=.o}
 
-NAME		=	libftprintf.a
+NAME	=	libftprintf.a
 
 CFLAGS	=	-Wextra -Wall -Werror
 
@@ -10,9 +10,6 @@ all		:	${NAME}
 
 .c		:	.o
 	cc ${CFLAGS} -c $< -o $@
-
-test	:	${NAME}
-	cc test.c ${NAME}
 
 ${NAME}	:	${OBJS}
 	ar rcs ${NAME} ${OBJS}

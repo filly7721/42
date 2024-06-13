@@ -6,7 +6,7 @@ int	rec_puthex(unsigned long long num, char *hex)
 
 	if (num <= 0)
 		return (0);
-	i = rec_puthex(num / 10, hex);
+	i = rec_puthex(num / 16, hex);
 	ft_putchar(hex[num % 16]);
 	return (i + 1);
 }
@@ -39,10 +39,12 @@ int	ft_putptr(void *ptr)
 {
 	int	i;
 	
+	if (ptr == NULL)
+		return (ft_putstr("(nil)"));
 	i = ft_putstr("0x");
 	if (ptr == 0)
-		i = ft_putchar(0);
+		i += ft_putchar(0);
 	else
-		i = rec_puthex((unsigned long long) ptr, "0123456789abcdef");
+		i += rec_puthex((unsigned long long) ptr, "0123456789abcdef");
 	return (i);
 }

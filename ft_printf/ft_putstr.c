@@ -11,6 +11,8 @@ int	ft_putstr(char *str)
 	int	i;
 
 	i = 0;
+	if (str == NULL)
+		return ft_putstr("(null)");
 	while (str[i])
 		i++;
 	write(1, str, i);
