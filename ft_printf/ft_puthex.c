@@ -38,12 +38,10 @@ int	ft_putuhex(unsigned int num)
 int	ft_putptr(void *ptr)
 {
 	int	i;
-	
+
 	if (ptr == NULL)
 		return (ft_putstr("(nil)"));
 	i = ft_putstr("0x");
-	if (ptr == 0)
-		i += ft_putchar(0);
 	else
 		i += rec_puthex((unsigned long long) ptr, "0123456789abcdef");
 	return (i);

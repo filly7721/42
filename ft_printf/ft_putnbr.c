@@ -26,7 +26,7 @@ int	ft_putuint(unsigned int n)
 int	ft_putint(int n)
 {
 	int	i;
-	
+
 	i = 0;
 	if (n < 0)
 	{

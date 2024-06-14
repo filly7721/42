@@ -16,7 +16,6 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-
 int	print_arg(char type, va_list args)
 {
 	if (type == 'c')
