@@ -44,7 +44,7 @@ char	*ft_itoa(int n)
 		res[size] = num % 10 + '0';
 		num /= 10;
 	}
-	if (size == 0)
+	if (n < 0)
 		res[0] = '-';
 	return (res);
 }

@@ -61,6 +61,14 @@ static char	*ft_word(const char *str, char c)
 	return (word);
 }
 
+char	**clear_strings(char **strings, int count)
+{
+	while (count >= 0)
+		free(strings[count--]);
+	free(strings);
+	return (NULL);
+}
+
 char	**ft_split(const char *str, char c)
 {
 	char	**strings;
@@ -78,6 +86,8 @@ char	**ft_split(const char *str, char c)
 		if (*str != '\0')
 		{
 			strings[i] = ft_word(str, c);
+			if (strings[i] == NULL)
+				return (clear_strings(strings, i));
 			i++;
 		}
 		while (*str != '\0' && *str != c)

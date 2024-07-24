@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 08:19:03 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/06/26 08:19:05 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/07/16 17:02:14 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/07/16 17:02:15 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H 
+#include "stack.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+void	ra(t_stacks *stacks)
+{
+	rotate(stacks->stack_a);
+	write(1, "ra\n", 3);
+}
 
-int	ft_printf(const char *str, ...);
-int	ft_putint(int n);
-int	ft_putuint(unsigned int n);
-int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int	ft_putlhex(unsigned int num);
-int	ft_putuhex(unsigned int num);
-int	ft_putptr(void *ptr);
+void	rb(t_stacks *stacks)
+{
+	rotate(stacks->stack_b);
+	write(1, "rb\n", 3);
+}
 
-#endif
+void	rr(t_stacks *stacks)
+{
+	rotate(stacks->stack_a);
+	rotate(stacks->stack_b);
+	write(1, "rr\n", 3);
+}

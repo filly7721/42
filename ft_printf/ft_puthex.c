@@ -5,56 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 13:31:09 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/06/14 13:31:09 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/26 08:17:18 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/26 08:17:21 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	rec_puthex(unsigned long long num, char *hex)
+static int	rec_puthex(unsigned long long n, const char *lookup)
 {
-	int	i;
+	int	count;
 
-	if (num <= 0)
-		return (0);
-	i = rec_puthex(num / 16, hex);
-	ft_putchar(hex[num % 16]);
-	return (i + 1);
+	if (n < 16)
+		return (ft_putchar(lookup[n]));
+	count = rec_puthex(n / 16, lookup);
+	if (count < 0)
+		return (-1);
+	if (ft_putchar(lookup[n % 16]) < 0)
+		return (-1);
+	return (count + 1);
 }
 
-int	ft_putlhex(unsigned int num)
+int	ft_putlhex(unsigned int n)
 {
-	int	i;
-
-	i = 0;
-	if (num == 0)
-		i += ft_putchar('0');
-	else
-		i += rec_puthex(num, "0123456789abcdef");
-	return (i);
+	return (rec_puthex(n, "0123456789abcdef"));
 }
 
-int	ft_putuhex(unsigned int num)
+int	ft_putuhex(unsigned int n)
 {
-	int	i;
-
-	i = 0;
-	if (num == 0)
-		i += ft_putchar('0');
-	else
-		i += rec_puthex(num, "0123456789ABCDEF");
-	return (i);
+	return (rec_puthex(n, "0123456789ABCDEF"));
 }
 
 int	ft_putptr(void *ptr)
 {
 	int	i;
 
-	if (ptr == NULL)
-		return (ft_putstr("(nil)"));
-	i = ft_putstr("0x");
-	else
-		i += rec_puthex((unsigned long long) ptr, "0123456789abcdef");
-	return (i);
+	if (ft_putstr("0x") < 0)
+		return (-1);
+	i = rec_puthex((unsigned long long) ptr, "0123456789abcdef");
+	if (i < 0)
+		return (-1);
+	return (2 + i);
 }

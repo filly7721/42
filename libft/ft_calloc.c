@@ -14,8 +14,8 @@
 
 void	*ft_calloc(size_t nelem, size_t elsize)
 {
-	unsigned int	size;
-	void			*arr;
+	size_t	size;
+	void	*arr;
 
 	size = nelem * elsize;
 	if (elsize != 0 && size / elsize != nelem)

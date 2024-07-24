@@ -5,28 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 13:31:09 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/06/14 13:31:09 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/26 08:16:54 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/26 08:17:10 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == (unsigned char)c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if (c == '\0')
-		return ((char *)&s[i]);
-	return (0);
-}
 
 int	print_arg(char type, va_list args)
 {
@@ -46,14 +30,15 @@ int	print_arg(char type, va_list args)
 		return (ft_putuhex(va_arg(args, unsigned int)));
 	if (type == '%')
 		return (ft_putchar('%'));
-	return (0);
+	return (-1);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	int			i;
-	int			count;
-	va_list		args;
+	int		i;
+	int		count;
+	int		res;
+	va_list	args;
 
 	va_start(args, str);
 	i = 0;
@@ -61,13 +46,17 @@ int	ft_printf(const char *str, ...)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
-		{
-			i++;
-			count += print_arg(str[i], args);
-		}
+			res = print_arg(str[++i], args);
 		else
-			count += ft_putchar(str[i]);
+			res = ft_putchar(str[i]);
 		i++;
+		if (res == -1)
+		{
+			va_end(args);
+			return (-1);
+		}
+		count += res;
 	}
+	va_end(args);
 	return (count);
 }

@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 08:19:03 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/06/26 08:19:05 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/07/16 17:02:36 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/07/16 17:02:37 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H 
+#include "stack.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+void	sa(t_stacks *stacks)
+{
+	swap(stacks->stack_a);
+	write(1, "sa\n", 3);
+}
 
-int	ft_printf(const char *str, ...);
-int	ft_putint(int n);
-int	ft_putuint(unsigned int n);
-int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int	ft_putlhex(unsigned int num);
-int	ft_putuhex(unsigned int num);
-int	ft_putptr(void *ptr);
+void	sb(t_stacks *stacks)
+{
+	swap(stacks->stack_b);
+	write(1, "sb\n", 3);
+}
 
-#endif
+void	ss(t_stacks *stacks)
+{
+	swap(stacks->stack_b);
+	swap(stacks->stack_a);
+	write(1, "ss\n", 3);
+}

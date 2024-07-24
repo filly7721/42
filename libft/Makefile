@@ -18,23 +18,23 @@ NAME	= libft.a
 
 CFLAGS	= -Wall -Wextra -Werror
 
-all:	${NAME}
+all		: ${NAME}
 
-%.o : %.c
+%.o		: %.c
 	cc ${CFLAGS} -c -I ${HEAD} $< -o $@
 
-${NAME}: ${OBJS}
+${NAME}	: ${OBJS}
 	ar rcs ${NAME} ${OBJS}
 
-bonus: ${NAME} ${BONUS_OBJS} 
+bonus	: ${NAME} ${BONUS_OBJS} 
 	ar rs ${NAME} ${BONUS_OBJS}
 
-clean:
+clean	:
 	rm -f ${OBJS} ${BONUS_OBJS}
 
-fclean:	clean
+fclean	: clean
 	rm -f ${NAME}
 
-re:	fclean all
+re		: fclean all
 
-.PHONY:	all clean fclean re bonus
+.PHONY	:	all clean fclean re bonus

@@ -1,7 +1,2 @@
-.vscode
-
 *.o
-*.out
-
-libftTester
-test
+libftTester/

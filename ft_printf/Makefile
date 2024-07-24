@@ -1,4 +1,5 @@
-SRCS	=	${shell find . -name '*.c'}
+
+SRCS	=	ft_puthex.c ft_putstr.c ft_putnbr.c ft_printf.c
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -8,12 +9,11 @@ CFLAGS	=	-Wextra -Wall -Werror
 
 all		:	${NAME}
 
-.c		:	.o
+%.o		:	%.c
 	cc ${CFLAGS} -c $< -o $@
 
 ${NAME}	:	${OBJS}
 	ar rcs ${NAME} ${OBJS}
-	ranlib ${NAME}
 
 clean	:
 	rm -f ${OBJS}

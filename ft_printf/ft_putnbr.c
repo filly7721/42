@@ -5,47 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 13:31:09 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/06/14 13:31:09 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/26 08:17:23 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/26 08:17:26 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	rec_putnbr(unsigned int num)
+static int	rec_putnbr(unsigned int n)
 {
-	int	i;
+	int		count;
 
-	if (num <= 0)
-		return (0);
-	i = rec_putnbr(num / 10);
-	ft_putchar(num % 10 + '0');
-	return (i + 1);
-}
-
-int	ft_putuint(unsigned int n)
-{
-	int	i;
-
-	i = 0;
-	if (n == 0)
-		i += ft_putchar('0');
-	else
-		i += rec_putnbr(n);
-	return (i);
+	if (n < 10)
+		return (ft_putchar(n + '0'));
+	count = rec_putnbr(n / 10);
+	if (count < 0)
+		return (-1);
+	if (ft_putchar(n % 10 + '0') < 0)
+		return (-1);
+	return (count + 1);
 }
 
 int	ft_putint(int n)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	if (n < 0)
-	{
-		i += ft_putchar('-');
-		i += ft_putuint(-n);
-	}
-	else
-		i += ft_putuint(n);
-	return (i);
+	count = 0;
+	if (n >= 0)
+		return (rec_putnbr(n));
+	if (ft_putchar('-') < 0)
+		return (-1);
+	count = rec_putnbr(-n);
+	if (count < 0)
+		return (-1);
+	return (1 + count);
+}
+
+int	ft_putuint(unsigned int n)
+{
+	return (rec_putnbr(n));
 }

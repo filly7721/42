@@ -1,21 +1,35 @@
-SRCS	=	stack/push.c stack/reverse_rotate.c stack/rotate.c stack/stack.c stack/swap.c stack/utils.c test.c
+SRCS		=	main.c parse.c init.c check.c small.c sort.c \
+				push.c reverse_rotate.c rotate.c stack.c swap.c
 
-OBJS	=	${SRCS:.c=.o}
+LIBFT_DIR	=	./libft
 
-NAME	=	output
+LIBFT		=	${LIBFT_DIR}/libft.a
 
-HEAD	=	stack
+OBJS		=	${SRCS:.c=.o}
 
-CFLAGS	=	-g
+NAME		=	push_swap
 
-all	:	${OBJS}
-		cc ${CFLAGS} ${OBJS} -o ${NAME} -I ${HEAD}
+CFLAGS		=	-Wall -Wextra -Werror
 
-%.o	:	%.c
-		cc ${CFLAGS} -I ${HEAD} -c $< -o $@
+all			:	${NAME}
 
-clean	:
+%.o			:	%.c
+		cc ${CFLAGS} -I ${LIBFT_DIR} -c $< -o $@
+
+${LIBFT}	:
+		make -C ${LIBFT_DIR}
+
+${NAME}		:	${LIBFT} ${OBJS}
+		cc ${CFLAGS} -I ${LIBFT_DIR} ${OBJS} ${LIBFT} -o ${NAME}
+
+clean		:
 		rm -f ${OBJS}
+		make -C ${LIBFT_DIR} clean
 
-fclean	:	clean
+fclean		:	clean
 		rm -f ${NAME}
+		make -C ${LIBFT_DIR} fclean
+
+re			:	fclean all
+
+.PHONY		:	all clean fclean re

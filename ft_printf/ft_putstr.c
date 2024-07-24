@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 13:31:09 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/06/14 13:31:09 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/26 08:17:28 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/26 08:17:30 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 int	ft_putchar(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }
 
 int	ft_putstr(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (str == NULL)
+	if (!str)
 		return (ft_putstr("(null)"));
-	while (str[i])
+	i = 0;
+	while (str[i] != '\0')
 		i++;
-	write(1, str, i);
-	return (i);
+	return (write(1, str, i));
 }
