@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 19:47:07 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/07/27 19:47:08 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/14 12:43:40 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/14 12:43:40 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "libft.h"
+char	*ft_strnstr(const char *big,	const char *little, size_t len)
+{
+	size_t	i;
+	size_t	max;
 
-# define DEF_ERR "pipex: an error has occured"
-
-char	*get_path(char *cmd, char **env);
-void	free_strs(char **strs);
-void	here_doc(char *limiter);
-
-#endif
+	if (little[0] == '\0')
+		return ((char *)big);
+	if (!len)
+		return (NULL);
+	max = len - ft_strlen(little) + 1;
+	i = 0;
+	while (big[i] != '\0' && i < max)
+	{
+		if (ft_strncmp(&big[i], little, ft_strlen(little)) == 0)
+			return ((char *)&big[i]);
+		i++;
+	}
+	return (NULL);
+}

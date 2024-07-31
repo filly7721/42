@@ -30,6 +30,26 @@ void	exec(char *str, char **env)
 	}
 }
 
+void	pipex(char *str, char **env)
+{
+	int		fds[2];
+	pid_t	pid;
+
+	if (pipe(fds) == -1)
+		(ft_putendl_fd(DEF_ERR, 2), exit(1));
+	pid = fork();
+	if (pid == -1)
+		(ft_putendl_fd(DEF_ERR, 2), exit(1));
+	if (pid == 0)
+	{
+		if (dup2(fds[1], 1) == -1 || close(fds[1]) == -1 || close(fds[0]) == -1)
+			(ft_putendl_fd(DEF_ERR, 2), exit(1));
+		exec(str, env);
+	}
+	if (dup2(fds[0], 0) == -1 || close(fds[1]) == -1 || close(fds[0]) == -1)
+		(ft_putendl_fd(DEF_ERR, 2), exit(1));
+}
+
 void	first_pipex(char *str, char **env, char *file_name)
 {
 	pid_t	pid;
@@ -44,20 +64,21 @@ void	first_pipex(char *str, char **env, char *file_name)
 	if (pid == 0)
 	{
 		infile = open(file_name, O_RDONLY);
-		if (dup2(fds[1], 1) == -1 || close(fds[1]) == -1 || close(fds[0]) == -1)
-			(ft_putendl_fd(DEF_ERR, 2), exit(1));
 		if (infile == -1 || dup2(infile, 0) == -1 || close(infile) == -1)
 			(ft_putstr_fd("pipex: error opening file: ", 2),
 				ft_putendl_fd(file_name, 2), exit(1));
+		if (dup2(fds[1], 1) == -1 || close(fds[1]) == -1 || close(fds[0]) == -1)
+			(ft_putendl_fd(DEF_ERR, 2), exit(1));
 		exec(str, env);
 	}
 	if (dup2(fds[0], 0) == -1 || close(fds[0]) == -1 || close(fds[1]) == -1)
 		(ft_putendl_fd(DEF_ERR, 2), exit(1));
 }
 
-pid_t	last_pipex(char *str, char **env, char *file_name)
+pid_t	last_pipex(char *str, char **env, char *file_name, int append)
 {
 	int		outfile;
+	int		flags;
 	pid_t	pid;
 
 	pid = fork();
@@ -65,7 +86,10 @@ pid_t	last_pipex(char *str, char **env, char *file_name)
 		(ft_putendl_fd(DEF_ERR, 2), exit(1));
 	if (pid == 0)
 	{
-		outfile = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		flags = O_WRONLY | O_CREAT | O_TRUNC;
+		if (append)
+			flags = O_WRONLY | O_CREAT | O_APPEND;
+		outfile = open(file_name, flags, 0644);
 		if (outfile == -1 || dup2(outfile, 1) == -1 || close(outfile) == -1)
 			(ft_putstr_fd("pipex: error opening file: ", 2),
 				ft_putendl_fd(file_name, 2), exit(1));
@@ -77,14 +101,24 @@ pid_t	last_pipex(char *str, char **env, char *file_name)
 
 int	main(int ac, char **av, char **env)
 {
-	int		status;
+	int		i;
+	int		is_heredoc;
 	pid_t	pid;
+	int		status;
 
-	if (ac != 5)
+	if (ac < 5)
 		(ft_putstr_fd("./pipex file1 cmd1 cmd2 file2\n", 2), exit(1));
-	first_pipex(av[2], env, av[1]);
-	pid = last_pipex(av[3], env, av[4]);
+	i = 1;
+	is_heredoc = ft_strncmp(av[i], "here_doc", ft_strlen("here_doc") + 1) == 0;
+	if (is_heredoc)
+		here_doc(av[++i]);
+	else
+		first_pipex(av[++i], env, av[1]);
+	while (++i < ac - 2)
+		pipex(av[i], env);
+	pid = last_pipex(av[i], env, av[i + 1], is_heredoc);
 	waitpid(pid, &status, 0);
-	wait(NULL);
-	exit(WEXITSTATUS(status));
+	while (wait(NULL) != -1)
+		;
+	return (WEXITSTATUS(status));
 }

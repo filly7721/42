@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 19:47:07 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/07/27 19:47:08 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/14 12:43:38 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/14 12:43:38 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "libft.h"
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t			i;
+	unsigned char	*src;
 
-# define DEF_ERR "pipex: an error has occured"
-
-char	*get_path(char *cmd, char **env);
-void	free_strs(char **strs);
-void	here_doc(char *limiter);
-
-#endif
+	src = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (src[i] == (unsigned char)c)
+			return ((void *)(src + i));
+		i++;
+	}
+	return (0);
+}

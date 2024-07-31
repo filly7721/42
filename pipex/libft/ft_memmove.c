@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 19:47:07 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/07/27 19:47:08 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/14 12:43:38 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/14 12:43:38 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "libft.h"
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	size_t	i;
 
-# define DEF_ERR "pipex: an error has occured"
-
-char	*get_path(char *cmd, char **env);
-void	free_strs(char **strs);
-void	here_doc(char *limiter);
-
-#endif
+	i = 0;
+	if (!dest && !src)
+		return (NULL);
+	if (dest < src)
+	{
+		while (i < n)
+		{
+			((char *)dest)[i] = ((char *)src)[i];
+			i++;
+		}
+	}
+	else
+	{
+		while (n > 0)
+		{
+			n--;
+			((char *)dest)[n] = ((char *)src)[n];
+		}
+	}
+	return (dest);
+}

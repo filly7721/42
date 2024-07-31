@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 19:47:07 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/07/27 19:47:08 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/14 12:43:40 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/14 12:43:40 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "libft.h"
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int		i;
+	int		j;
+	char	*res;
 
-# define DEF_ERR "pipex: an error has occured"
-
-char	*get_path(char *cmd, char **env);
-void	free_strs(char **strs);
-void	here_doc(char *limiter);
-
-#endif
+	i = 0;
+	j = ft_strlen(s1) - 1;
+	while (s1[i] != '\0' && ft_strchr(set, s1[i]))
+		i++;
+	while (j >= i && ft_strchr(set, s1[j]))
+		j--;
+	j++;
+	res = malloc(sizeof(char) * (j - i + 1));
+	if (res)
+		ft_strlcpy(res, &s1[i], j - i + 1);
+	return (res);
+}

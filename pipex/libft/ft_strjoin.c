@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 19:47:07 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/07/27 19:47:08 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/14 12:43:40 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/14 12:43:40 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "libft.h"
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*res;
+	int		size1;
+	int		size2;
+	int		i;
+	int		j;
 
-# define DEF_ERR "pipex: an error has occured"
-
-char	*get_path(char *cmd, char **env);
-void	free_strs(char **strs);
-void	here_doc(char *limiter);
-
-#endif
+	size1 = ft_strlen(s1);
+	size2 = ft_strlen(s2);
+	res = malloc(sizeof(char) * (size1 + size2 + 1));
+	if (!res)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (j < size1)
+		res[i++] = s1[j++];
+	j = 0;
+	while (j < size2)
+		res[i++] = s2[j++];
+	res[i] = '\0';
+	return (res);
+}

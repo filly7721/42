@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ashalaab <ashalaab@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 19:47:07 by ashalaab          #+#    #+#             */
-/*   Updated: 2024/07/27 19:47:08 by ashalaab         ###   ########.fr       */
+/*   Created: 2024/06/14 13:29:58 by ashalaab          #+#    #+#             */
+/*   Updated: 2024/06/14 13:29:58 by ashalaab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <unistd.h>
-# include <sys/wait.h>
-# include "libft.h"
+# include <stdlib.h>
 
-# define DEF_ERR "pipex: an error has occured"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-char	*get_path(char *cmd, char **env);
-void	free_strs(char **strs);
-void	here_doc(char *limiter);
+char	*get_next_line(int fd);
+
+char	*ft_strdup(char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strcpy(char *dest, const char *src);
 
 #endif
