@@ -14,7 +14,7 @@ NAME		=	pipex
 
 BONUS_NAME	=	pipex_bonus
 
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra -Werror
 
 all				:	${NAME}
 

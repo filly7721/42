@@ -75,6 +75,8 @@ pid_t	last_pipex(char *str, char **env, char *file_name)
 	return (pid);
 }
 
+#include <stdio.h>
+
 int	main(int ac, char **av, char **env)
 {
 	int		status;
