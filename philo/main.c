@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 			, 1);
 	philos = init(av, &env);
 	if (!philos)
-		(printf("an error has occured"), exit(1));
+		(printf("an error has occured\n"), exit(1));
 	i = -1;
 	while (++i < env.count)
 		pthread_create(&philos[i].thread_id, NULL, philo, &philos[i]);

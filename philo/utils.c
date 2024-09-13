@@ -26,7 +26,7 @@ void	msleep(t_philo *philo, t_timestamp ms)
 
 	start = time_offset(philo->env->start_time);
 	while (check_continue(philo)
-		&& time_offset(philo->env->start_time) - start <= ms)
+		&& time_offset(philo->env->start_time) - start < ms)
 		usleep(100);
 }
 

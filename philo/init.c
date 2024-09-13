@@ -15,25 +15,21 @@
 static int	parse_num(char *str, int *status)
 {
 	int	i;
-	int	sign;
 	int	res;
 
 	if (!str)
 		return (0);
-	sign = 1;
 	res = 0;
 	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '+')
 		i++;
-	if (str[i] < '0' || str[i] > '9')
-		*status = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 		res = res * 10 + str[i++] - '0';
-	if (str[i] != '\0')
+	if (str[i] != '\0' || res == 0)
 		*status = 0;
-	return (sign * res);
+	return (res);
 }
 
 static t_philo	*init_philos(t_env *env)
@@ -59,8 +55,6 @@ static int	parse_input(char **av, t_env *env)
 	int	success;
 
 	success = 1;
-	env->start_time = time_offset(0);
-	env->running = 1;
 	env->count = parse_num(av[1], &success);
 	env->death_time = parse_num(av[2], &success);
 	env->eat_time = parse_num(av[3], &success);
@@ -93,6 +87,8 @@ t_philo	*init(char**av, t_env *env)
 		return (NULL);
 	if (pthread_mutex_init(&env->value_lock, NULL))
 		return (pthread_mutex_destroy(&env->print_lock), NULL);
+	env->start_time = time_offset(0);
+	env->running = 1;
 	if (!parse_input(av, env))
 		return (NULL);
 	while (i < env->count)
