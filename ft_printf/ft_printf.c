@@ -51,10 +51,7 @@ int	ft_printf(const char *str, ...)
 			res = ft_putchar(str[i]);
 		i++;
 		if (res == -1)
-		{
-			va_end(args);
-			return (-1);
-		}
+			return (va_end(args), -1);
 		count += res;
 	}
 	va_end(args);

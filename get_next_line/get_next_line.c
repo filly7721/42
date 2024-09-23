@@ -32,8 +32,8 @@ char	*read_line(int fd, char *prev)
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	bytes = 1;
 	line = ft_strdup(prev);
+	bytes = 1;
 	while (line != NULL && bytes > 0 && !ft_strchr(line, '\n'))
 	{
 		bytes = read(fd, buff, BUFFER_SIZE);
